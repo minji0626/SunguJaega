@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>네이버 지도 Static Map 예제</title>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 20px; background: #f6f7fb; }
+        h1 { margin: 0 0 12px; }
+        #map-container { width: 100%; max-width: 720px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); overflow: hidden; background: #fff; }
+        #map-image { display: block; width: 100%; height: auto; }
+        .note { margin-top: 12px; color: #555; line-height: 1.6; }
+        code { background: #eef2ff; padding: 2px 6px; border-radius: 6px; }
+        .status { margin: 10px 0; padding: 10px 12px; border-radius: 8px; background: #fff4e5; color: #7a4a00; display: none; }
+    </style>
+</head>
+<body>
+    <h1>네이버 지도 Static Map 예제</h1>
+    <div id="map-container" role="img" aria-label="네이버 지도 스태틱 이미지">
+        <img id="map-image" alt="네이버 지도" loading="lazy" />
+    </div>
+    <p id="map-status" class="status"></p>
+    <p class="note">
+        이 예제는 <strong>네이버 지도 Static Map API</strong>를 사용해 정적인 지도를 <code>&lt;img&gt;</code> 태그로 렌더링합니다.<br>
+        요청 URL에 <code>X-NCP-APIGW-API-KEY-ID</code>와 <code>X-NCP-APIGW-API-KEY</code>를 쿼리로 포함하기 때문에, 실제 배포 시에는 <strong>백엔드 프록시</strong>를 통해 키를 숨기는 것이 안전합니다.
+    </p>
+    <p class="note">
+        <strong>설정 방법</strong><br>
+        1) <code>const clientId</code>와 <code>clientSecret</code>을 네이버 클라우드 플랫폼에서 발급받은 지도 클라이언트 ID/Secret으로 교체합니다.<br>
+        2) Static Map 허용 도메인에 이 페이지의 호스트(<code><script>document.write(location.protocol + "//" + location.host)</script></code>)를 등록합니다.<br>
+        3) 중심 좌표(<code>centerLat</code>, <code>centerLng</code>)와 마커 위치(<code>markerLat</code>, <code>markerLng</code>)를 원하는 위치로 수정합니다.<br>
+        4) 저장 후 새로고침하면 정적 지도가 바로 표시됩니다.
+    </p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const mapImg = document.getElementById("map-image");
+            const status = document.getElementById("map-status");
+
+            const clientId = "YOUR_CLIENT_ID";      // 네이버 지도 클라이언트 ID
+            const clientSecret = "YOUR_CLIENT_SECRET"; // 네이버 지도 클라이언트 Secret
+
+            const centerLat = 37.5665;  // 지도 중심 위도 (예: 서울 시청)
+            const centerLng = 126.9780; // 지도 중심 경도
+            const markerLat = 37.5665;  // 마커 위도
+            const markerLng = 126.9780; // 마커 경도
+            const width = 720;  // 이미지 가로(px)
+            const height = 420; // 이미지 세로(px)
+            const level = 14;   // 확대 레벨 (1~20, 숫자 커질수록 축소)
+
+            const showMessage = (message) => {
+                if (!status) return;
+                status.textContent = message;
+                status.style.display = "block";
+            };
+
+            if (!mapImg) return;
+
+            if (!clientId || clientId === "YOUR_CLIENT_ID" || !clientSecret || clientSecret === "YOUR_CLIENT_SECRET") {
+                showMessage("네이버 지도 클라이언트 ID와 Secret을 설정하세요. 발급받은 키로 clientId/clientSecret 값을 교체하고, 허용 도메인에 현재 호스트를 추가해야 합니다.");
+                return;
+            }
+
+            const params = new URLSearchParams({
+                center: `${centerLng},${centerLat}`,
+                level: String(level),
+                w: String(width),
+                h: String(height),
+                markers: `type:d|size:mid|pos:${markerLng} ${markerLat}`,
+                "X-NCP-APIGW-API-KEY-ID": clientId,
+                "X-NCP-APIGW-API-KEY": clientSecret,
+            });
+
+            const src = `https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?${params.toString()}`;
+            mapImg.src = src;
+
+            mapImg.onerror = () => {
+                showMessage("지도 이미지를 불러오지 못했습니다. 발급받은 ID/Secret과 허용 도메인을 다시 확인하세요.");
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오시는 길 - 선구재가복지센터</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css" />
+    <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=eurikx1zl0" defer></script>
+    <script defer src="assets/main.js"></script>
+</head>
+<body>
+    <!-- 모바일 사이드 메뉴 -->
+    <aside class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴">
+        <div class="close-btn" id="closeMenu" aria-label="모바일 메뉴 닫기">✕</div>
+        <ul>
+            <li><a href="./" class="home-link">홈</a></li>
+            <li><a href="about">센터소개</a></li>
+            <li><a href="greeting">인사말</a></li>
+            <li><a href="services">서비스 안내</a></li>
+            <li><a href="location">오시는 길</a></li>
+            <li><a href="process">이용 절차</a></li>
+        </ul>
+    </aside>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-area">
+            <img src="assets/logo.png" class="logo-img" alt="선구재가복지센터 로고" />
+            <div class="logo-text">
+                <span class="center-name">선구재가복지센터</span>
+                <span class="tagline">지역사회와 함께하는 믿음직한 돌봄</span>
+            </div>
+        </div>
+        <nav class="nav" id="nav">
+            <div class="mobile-menu-btn" id="menuBtn" aria-label="모바일 메뉴 열기">☰</div>
+            <ul class="nav-menu">
+                <li><a href="./" class="home-link">홈</a></li>
+                <li><a href="about">센터소개</a></li>
+                <li><a href="greeting">인사말</a></li>
+                <li><a href="services">서비스 안내</a></li>
+                <li><a href="location">오시는 길</a></li>
+                <li><a href="process">이용 절차</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="hero-inner">
+                <span class="eyebrow">Visit</span>
+                <h1>오시는 길</h1>
+                <p>경기도 양평군 용문면 용문로 323, 2층에 위치해 있습니다. 방문 상담은 예약 후 편하게 찾아오세요.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="content-card map-card reveal">
+                <div>
+                    <div class="section-heading">
+                        <span class="icon-badge" aria-hidden="true">📍</span>
+                        <div>
+                            <h2 style="margin:0;">센터 주소</h2>
+                        </div>
+                    </div>
+                    <p>경기도 양평군 용문면 용문로 323, 2층</p>
+                    <ul class="icon-list">
+                        <li>
+                            <span class="icon-badge" aria-hidden="true">📞</span>
+                            <div>
+                                <strong>전화</strong>
+                                <p>031-771-1689</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon-badge" aria-hidden="true">⏰</span>
+                            <div>
+                                <strong>근무시간</strong>
+                                <p>평일 09:00 ~ 18:00</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon-badge" aria-hidden="true">🚗</span>
+                            <div>
+                                <strong>주차 안내</strong>
+                                <p>자가용 이용 시 건물 내·주변 주차장 이용</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map-wrapper">
+                    <div
+                        id="naverMap"
+                        class="map-embed"
+                        data-lat="37.482342"
+                        data-lng="127.590738"
+                        data-title="선구재가복지센터"
+                        aria-label="네이버 지도"
+                    ></div>
+                    <div class="map-actions">
+                        <a class="map-button" href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%96%91%ED%8F%89%EA%B5%B0%20%EC%9A%A9%EB%AC%B8%EB%A9%B4%20%EC%9A%A9%EB%AC%B8%EB%A1%9C%20323%2C%202%EC%B8%B5" target="_blank" rel="noopener">
+                            <span class="icon">🗺️</span>
+                            <span>카카오맵 새 창에서 보기</span>
+                        </a>
+                        <a class="map-button ghost" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%96%91%ED%8F%89%EA%B5%B0%20%EC%9A%A9%EB%AC%B8%EB%A9%B4%20%EC%9A%A9%EB%AC%B8%EB%A1%9C%20323%2C%202%EC%B8%B5" target="_blank" rel="noopener">
+                            <span class="icon">🚀</span>
+                            <span>네이버지도 길찾기</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-info">
+                <div class="footer-heading">
+                    <img src="assets/logo.png" class="footer-logo" alt="선구재가복지센터 로고" />
+                    <div>
+                        <p class="footer-name">선구재가복지센터</p>
+                        <p class="footer-director">센터장 하선구</p>
+                        <p class="footer-tagline">지역사회와 함께하는 믿음직한 돌봄</p>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>경기도 양평군 용문면 용문로 323, 2층</div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">☎</span>
+                        <div>TEL: 031-771-1689<br />FAX: 031-774-1689</div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>E-mail: kop030079@naver.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <p class="footer-nav-title">바로가기</p>
+                <div class="footer-links">
+                    <a href="about">센터소개</a>
+                    <a href="greeting">인사말</a>
+                    <a href="services">서비스 안내</a>
+                    <a href="process">이용 절차</a>
+                    <a href="location">오시는 길</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toTop" aria-label="맨 위로">▲</div>
+</body>
+</html>
