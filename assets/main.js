@@ -24,6 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    /* ---------- 떠 있는 전화 버튼 ----------
+       첫 화면(홈 히어로 또는 페이지 제목)이 보이는 동안은 숨기고,
+       지나서 스크롤하면 나타나게 해 처음 화면이 복잡해 보이지 않도록 함 */
+    const callFloat = document.querySelector(".call-float");
+    const firstScreen = document.querySelector(".hero, .page-head");
+    if (callFloat && firstScreen && "IntersectionObserver" in window) {
+        document.documentElement.classList.add("js");
+        new IntersectionObserver(([entry]) => {
+            callFloat.classList.toggle("is-visible", !entry.isIntersecting);
+        }).observe(firstScreen);
+    }
+
     /* ---------- 네이버 지도 ---------- */
     const mapEl = document.getElementById("naverMap");
     if (!mapEl) return;
