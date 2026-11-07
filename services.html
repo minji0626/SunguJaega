@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>서비스 안내 | 선구복지센터</title>
     <meta name="description" content="선구복지센터의 방문요양, 방문목욕, 장기요양등급 신청 지원, 가족 상담과 요양보호사 모집 안내입니다." />
     <link rel="canonical" href="https://sungujaega.com/services" />
@@ -15,14 +15,14 @@
     <meta property="og:url" content="https://sungujaega.com/services" />
     <meta property="og:image" content="https://sungujaega.com/images/og-image.jpg" />
     <meta property="og:locale" content="ko_KR" />
-    <meta name="theme-color" content="#1b3c87" />
+    <meta name="theme-color" content="#2756d1" />
 
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Pretendard (필요한 글자만 내려받는 동적 서브셋) -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="assets/style.css" />
     <script defer src="assets/main.js"></script>
 
@@ -42,8 +42,10 @@
             "streetAddress": "용문면 하진1길 41",
             "addressLocality": "양평군",
             "addressRegion": "경기도",
+            "postalCode": "12521",
             "addressCountry": "KR"
         },
+        "geo": { "@type": "GeoCoordinates", "latitude": 37.4820343, "longitude": 127.5902044 },
         "openingHours": "Mo-Fr 09:00-18:00"
     }
     </script>
@@ -54,12 +56,11 @@
     <header class="site-header">
         <div class="wrap">
             <a class="brand" href="./">
-                <img src="assets/mark.png" width="30" height="39" alt="" />
+                <img src="assets/mark.png" width="28" height="37" alt="" />
                 <span class="brand-name">선구복지센터</span>
             </a>
-            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-                메뉴
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="메뉴 열기">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
             </button>
             <nav class="site-nav" id="siteNav" aria-label="주 메뉴">
                 <ul class="nav-list">
@@ -70,16 +71,13 @@
                     <li><a href="location">오시는 길</a></li>
                 </ul>
             </nav>
-            <a class="header-call" href="tel:0317721689">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
-                031-772-1689
-            </a>
+            <a class="header-call" href="tel:0317721689"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>031-772-1689</a>
         </div>
     </header>
 
     <main id="main">
         <section class="page-head">
-            <div class="wrap">
+            <div class="wrap"><div class="page-head-card">
                 <h1>서비스 안내</h1>
                 <p>장기요양등급 신청부터 방문요양·방문목욕까지, 첫 상담에서 서비스 시작까지 편안하게 안내해 드립니다.</p>
                 <ul class="page-toc" aria-label="이 페이지의 내용">
@@ -89,22 +87,24 @@
                     <li><a href="#bath">방문목욕</a></li>
                     <li><a href="#family">가족 지원</a></li>
                     <li><a href="#recruit">요양보호사 모집</a></li>
-                </ul>
+                </ul></div>
             </div>
         </section>
 
         <section class="section" id="target" aria-labelledby="target-title">
-            <div class="wrap split">
+            <div class="wrap grid-2">
                 <div>
                     <h2 id="target-title">서비스 대상</h2>
                     <p>65세 이상 노인성 질환 어르신은 물론, 65세 이하 치매·파킨슨 등으로 도움이 필요한 분들께 재가 서비스를 제공합니다. 등급 판정이 아직 없으셔도 먼저 상담 후 대리 신청을 도와드립니다.</p>
                 </div>
-                <ul class="leaf-list">
+                <div class="card">
+                <ul class="check-list">
                     <li><strong>장기요양등급 1~5등급</strong><span>서류 안내, 대리 신청, 결과 공유까지 전담 지원</span></li>
                     <li><strong>65세 이하 치매·파킨슨</strong><span>노인성 질환 진단 시 등급 신청 및 맞춤 케어 플랜 제공</span></li>
                     <li><strong>지역 제한 없는 파견</strong><span>서울·경기·지방 어디든 요양보호사 연결</span></li>
                     <li><strong>등급 전 상담</strong><span>예비 상담 후 긴급 돌봄과 대리 신청까지 이어서 지원</span></li>
                 </ul>
+                </div>
             </div>
         </section>
 
@@ -114,19 +114,19 @@
                     <h2 id="grade-title">장기요양등급 대리 신청</h2>
                     <p>서류, 방문조사, 일정 조율까지 처음부터 끝까지 함께합니다.</p>
                 </div>
-                <div class="split">
-                    <div class="panel">
+                <div class="grid-2">
+                    <div class="card">
                         <h3>지원 내용</h3>
-                        <ul class="leaf-list">
+                        <ul class="check-list">
                             <li>필요 서류 안내와 작성 도움</li>
                             <li>국민건강보험공단 신청 대리 진행</li>
                             <li>방문조사 준비 사항 안내</li>
                             <li>등급 결과에 맞춘 서비스 설계</li>
                         </ul>
                     </div>
-                    <div class="panel">
+                    <div class="card">
                         <h3>진행 순서</h3>
-                        <ol class="steps steps-vertical">
+                        <ol class="timeline">
                             <li><strong>상담</strong><p>전화나 방문 상담으로 어르신 상태를 파악합니다.</p></li>
                             <li><strong>서류 준비</strong><p>필요 서류 목록을 드리고 함께 모읍니다.</p></li>
                             <li><strong>신청과 방문조사</strong><p>대리 신청을 접수하고 방문조사 일정을 안내합니다.</p></li>
@@ -144,7 +144,7 @@
                     <h2 id="care-title">방문요양</h2>
                     <p>식사·위생·청결 지원부터 말벗, 산책, 병원 동행까지 일상의 안전과 활력을 책임집니다. 치매·파킨슨 케어 경험이 있는 요양보호사가 배치됩니다.</p>
                 </div>
-                <ul class="tags">
+                <ul class="chips">
                     <li>개인위생·청결관리</li>
                     <li>식사 준비·영양관리</li>
                     <li>운동·재활 보조</li>
@@ -153,18 +153,18 @@
                     <li>치매·파킨슨 케어</li>
                     <li>가족 부재 시 안전 확인</li>
                 </ul>
-                <div class="split">
-                    <div class="panel">
+                <div class="grid-2">
+                    <div class="card">
                         <h3>하루 돌봄 예시</h3>
-                        <ul class="leaf-list">
+                        <ul class="check-list">
                             <li>아침 건강 확인, 식사 준비, 약 복용 확인</li>
                             <li>낙상 예방 체조와 인지 자극 활동</li>
                             <li>주 1회 외출·병원 동행, 가사·세탁 병행</li>
                         </ul>
                     </div>
-                    <div class="panel">
+                    <div class="card">
                         <h3>이렇게 살핍니다</h3>
-                        <ul class="leaf-list">
+                        <ul class="check-list">
                             <li>상태가 바뀌면 보호자와 센터에 바로 알립니다</li>
                             <li>재활·운동 목표에 맞춰 주간 일과를 조정합니다</li>
                             <li>정서 안정을 위해 담당자를 되도록 바꾸지 않습니다</li>
@@ -180,23 +180,23 @@
                     <h2 id="bath-title">방문목욕</h2>
                     <p>목욕 장비와 방수 장비를 갖추고 2인 1조로 진행합니다. 거동이 어려운 분도 편안하시도록 동선부터 체온까지 챙기고, 욕실 정리까지 마무리합니다.</p>
                 </div>
-                <ul class="tags">
+                <ul class="chips">
                     <li>위생 관리</li>
                     <li>2인 1조 안전 케어</li>
                     <li>피부·상처 상태 확인</li>
                     <li>체온 유지·낙상 예방</li>
                     <li>목욕 후 주변 정리</li>
                 </ul>
-                <div class="split">
-                    <div class="panel">
+                <div class="grid-2">
+                    <div class="card">
                         <h3>안전하게 진행하는 방법</h3>
-                        <ul class="leaf-list">
+                        <ul class="check-list">
                             <li>시작 전 컨디션을 확인하고 물 온도와 동선을 정합니다</li>
                             <li>이동과 자세 바꿀 때는 두 사람이 함께 돕습니다</li>
                             <li>피부 상태를 확인하고 보습까지 마칩니다</li>
                         </ul>
                     </div>
-                    <div class="panel">
+                    <div class="card">
                         <h3>권장 횟수</h3>
                         <p>주 1~2회를 권장하며, 계절과 건강 상태에 따라 횟수와 방법(부분 세정, 전신 목욕)을 조정해 드립니다.</p>
                     </div>
@@ -205,27 +205,29 @@
         </section>
 
         <section class="section" id="family" aria-labelledby="family-title">
-            <div class="wrap split">
+            <div class="wrap grid-2">
                 <div>
                     <h2 id="family-title">가족과 함께 세우는 돌봄</h2>
                     <p>센터 담당자가 정기적으로 방문·전화 상담을 하며 서비스 만족도와 건강 변화를 확인합니다. 필요하면 병원, 치매안심센터, 지자체 복지서비스와 연계합니다.</p>
                 </div>
-                <ul class="leaf-list">
+                <div class="card">
+                <ul class="check-list">
                     <li>돌봄 일지 공유와 응급 상황 대응 절차 운영</li>
                     <li>가족이 쉴 수 있도록 대체 인력 일정 제안</li>
                     <li>의료·재활·복지 자원 연계</li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <section class="section" id="recruit" aria-labelledby="recruit-title">
             <div class="wrap">
-                <div class="panel">
+                <div class="card">
                     <h2 id="recruit-title">요양보호사 상시 모집</h2>
-                    <div class="split">
+                    <div class="grid-2">
                         <div>
                             <h3>모집 분야</h3>
-                            <ul class="leaf-list">
+                            <ul class="check-list">
                                 <li>방문요양, 방문목욕</li>
                                 <li>치매·파킨슨 케어 가능자 우대</li>
                             </ul>
@@ -239,26 +241,26 @@
             </div>
         </section>
 
-        <!-- 연락처 띠 (여러 페이지 공통) -->
-        <section class="contact-band" aria-labelledby="contact-title">
+        <!-- 상담 배너 (여러 페이지 공통) -->
+        <section class="section" aria-labelledby="contact-title">
             <div class="wrap">
-                <div>
-                    <h2 id="contact-title">궁금한 점은 전화로 편하게 물어보세요</h2>
-                    <p>등급이 없어도, 아직 결정하지 않으셨어도 괜찮습니다.</p>
-                    <a class="band-number" href="tel:0317721689">031-772-1689</a>
+                <div class="cta">
+                    <div>
+                        <h2 id="contact-title">궁금한 점은 전화로 편하게 물어보세요</h2>
+                        <p>등급이 없어도, 아직 결정하지 않으셨어도 괜찮습니다.</p>
+                        <a class="cta-number" href="tel:0317721689"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>031-772-1689</a>
+                    </div>
+                    <dl class="cta-info">
+                        <dt>주소</dt>
+                        <dd>경기도 양평군 용문면 하진1길 41</dd>
+                        <dt>상담 시간</dt>
+                        <dd>평일 오전 9시 ~ 오후 6시</dd>
+                        <dt>팩스</dt>
+                        <dd>031-773-1688</dd>
+                        <dt>찾아오기</dt>
+                        <dd><a href="location">오시는 길 안내</a></dd>
+                    </dl>
                 </div>
-                <dl class="contact-list">
-                    <dt>주소</dt>
-                    <dd>경기도 양평군 용문면 하진1길 41</dd>
-                    <dt>상담 시간</dt>
-                    <dd>평일 오전 9시 ~ 오후 6시</dd>
-                    <dt>팩스</dt>
-                    <dd>031-773-1688</dd>
-                    <dt>이메일</dt>
-                    <dd><a href="mailto:kop030079@naver.com">kop030079@naver.com</a></dd>
-                    <dt>찾아오기</dt>
-                    <dd><a href="location">오시는 길 안내</a></dd>
-                </dl>
             </div>
         </section>
     </main>
@@ -267,7 +269,7 @@
         <div class="wrap">
             <div>
                 <div class="footer-brand">
-                    <img src="assets/mark.png" width="26" height="34" alt="" />
+                    <img src="assets/mark.png" width="24" height="31" alt="" />
                     <span>선구복지센터</span>
                 </div>
                 <p>센터장 하선구</p>
@@ -290,10 +292,7 @@
         </div>
     </footer>
 
-    <!-- 모바일 하단 고정 전화 버튼 -->
-    <a class="call-bar" href="tel:0317721689">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
-        전화 상담 031-772-1689
-    </a>
+    <!-- 떠 있는 전화 버튼 (모바일에서는 하단 바) -->
+    <a class="call-float" href="tel:0317721689"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>전화 상담 031-772-1689</a>
 </body>
 </html>

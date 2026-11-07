@@ -30,6 +30,24 @@ $vars['NAVER_MAP_URL'] = "https://map.naver.com/p/search/$q"
 $vars['KAKAO_MAP_URL'] = "https://map.kakao.com/?q=$q"
 $vars['YEAR'] = (Get-Date).Year
 
+# 아이콘 (24x24 선 아이콘). 페이지에서 {{ICON:이름}} 으로 사용
+$iconPaths = @{
+    phone   = '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'
+    home    = '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'
+    drop    = '<path d="M12 2.7s-6 6.6-6 11.3a6 6 0 0 0 12 0c0-4.7-6-11.3-6-11.3z"/>'
+    file    = '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'
+    pin     = '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'
+    heart   = '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/>'
+    users   = '<path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"/><circle cx="10" cy="7.5" r="3.5"/><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.5-3.4M15.5 4.2a3.5 3.5 0 0 1 0 6.6"/>'
+    shield  = '<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>'
+    clock   = '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    chevron = '<path d="m9 6 6 6-6 6"/>'
+    menu    = '<path d="M4 7h16M4 12h16M4 17h16"/>'
+}
+function Get-Icon($name) {
+    '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + $iconPaths[$name] + '</svg>'
+}
+
 $template    = Read-Text "$buildDir\template.html"
 $contactBand = Read-Text "$buildDir\partials\contact-band.html"
 $navKeys     = 'about', 'greeting', 'services', 'process', 'location'
@@ -65,6 +83,9 @@ Get-ChildItem "$buildDir\pages\*.html" | ForEach-Object {
 
     # 센터 정보 치환
     foreach ($k in $vars.Keys) { $html = $html.Replace("{{$k}}", [string]$vars[$k]) }
+
+    # 아이콘 치환
+    $html = [regex]::Replace($html, '\{\{ICON:(\w+)\}\}', { param($m) if (-not $iconPaths.ContainsKey($m.Groups[1].Value)) { throw "알 수 없는 아이콘: $($m.Groups[1].Value)" }; Get-Icon $m.Groups[1].Value })
 
     # 남은 자리표시자가 있으면 실수이므로 중단
     if ($html -match '\{\{[A-Z_a-z]+\}\}') { throw "$($_.Name): 치환되지 않은 값 $($Matches[0])" }
