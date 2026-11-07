@@ -3,29 +3,127 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>리다이렉트 중...</title>
-    <style>
-        body { font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif; margin: 0; min-height: 100vh; display: grid; place-items: center; background: linear-gradient(135deg, #f5f7fb, #eef2f7); color: #1f2933; }
-        .card { background: #fff; padding: 32px; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); max-width: 420px; text-align: center; }
-        .card h1 { font-size: 22px; margin: 0 0 12px; }
-        .card p { margin: 0 0 8px; line-height: 1.5; color: #4b5563; }
-        .card small { color: #6b7280; }
-    </style>
+    <title>페이지를 찾을 수 없습니다 | 선구복지센터</title>
+    <meta name="description" content="요청하신 페이지를 찾을 수 없습니다." />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://sungujaega.com/404" />
+
+    <!-- 공유 미리보기 (카카오톡·페이스북 등) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="선구복지센터" />
+    <meta property="og:title" content="페이지를 찾을 수 없습니다 | 선구복지센터" />
+    <meta property="og:description" content="요청하신 페이지를 찾을 수 없습니다." />
+    <meta property="og:url" content="https://sungujaega.com/404" />
+    <meta property="og:image" content="https://sungujaega.com/images/og-image.jpg" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="theme-color" content="#1b3c87" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script defer src="/assets/main.js"></script>
+
+    <!-- 검색엔진용 업체 정보 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "선구복지센터",
+        "url": "https://sungujaega.com/",
+        "image": "https://sungujaega.com/images/og-image.jpg",
+        "telephone": "+82-31-772-1689",
+        "faxNumber": "+82-31-773-1688",
+        "email": "kop030079@naver.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "용문면 하진1길 41",
+            "addressLocality": "양평군",
+            "addressRegion": "경기도",
+            "addressCountry": "KR"
+        },
+        "openingHours": "Mo-Fr 09:00-18:00"
+    }
+    </script>
 </head>
 <body>
-    <div class="card">
-        <h1>페이지로 이동하고 있어요</h1>
-        <p>요청하신 주소를 확인해 <strong>.html</strong> 확장자를 붙여 다시 이동합니다.</p>
-        <small>새로고침 없이 잠시만 기다려 주세요.</small>
-    </div>
-    <script>
-        (function redirectToHtml() {
-            const path = location.pathname.replace(/\/$/, "");
-            const hasHtml = /\.html$/i.test(path);
-            if (hasHtml) return;
-            const target = `${path || '/index'}.html${location.search}${location.hash}`;
-            location.replace(target);
-        })();
-    </script>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="/">
+                <img src="/assets/mark.png" width="30" height="39" alt="" />
+                <span class="brand-name">선구복지센터</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                메뉴
+            </button>
+            <nav class="site-nav" id="siteNav" aria-label="주 메뉴">
+                <ul class="nav-list">
+                    <li><a href="/about">센터소개</a></li>
+                    <li><a href="/greeting">인사말</a></li>
+                    <li><a href="/services">서비스 안내</a></li>
+                    <li><a href="/process">이용 절차</a></li>
+                    <li><a href="/location">오시는 길</a></li>
+                </ul>
+            </nav>
+            <a class="header-call" href="tel:0317721689">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+                031-772-1689
+            </a>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="page-head">
+            <div class="wrap">
+                <h1>페이지를 찾을 수 없습니다</h1>
+                <p>주소가 바뀌었거나 없는 페이지입니다. 아래 메뉴에서 원하시는 내용을 찾아보세요.</p>
+                <ul class="page-toc">
+                    <li><a href="/">홈으로</a></li>
+                    <li><a href="/services">서비스 안내</a></li>
+                    <li><a href="/process">이용 절차</a></li>
+                    <li><a href="/location">오시는 길</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <div class="footer-brand">
+                    <img src="/assets/mark.png" width="26" height="34" alt="" />
+                    <span>선구복지센터</span>
+                </div>
+                <p>센터장 하선구</p>
+                <p>경기도 양평군 용문면 하진1길 41</p>
+                <p>전화 <a href="tel:0317721689">031-772-1689</a></p>
+                <p>팩스 031-773-1688</p>
+                <p>이메일 <a href="mailto:kop030079@naver.com">kop030079@naver.com</a></p>
+            </div>
+            <nav class="footer-nav" aria-label="바닥글 메뉴">
+                <ul>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/about">센터소개</a></li>
+                    <li><a href="/greeting">인사말</a></li>
+                    <li><a href="/services">서비스 안내</a></li>
+                    <li><a href="/process">이용 절차</a></li>
+                    <li><a href="/location">오시는 길</a></li>
+                </ul>
+                <p class="copyright">© 2026 선구복지센터</p>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- 모바일 하단 고정 전화 버튼 -->
+    <a class="call-bar" href="tel:0317721689">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+        전화 상담 031-772-1689
+    </a>
 </body>
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    {{ROBOTS}}<link rel="canonical" href="{{SITE_URL}}{{PATH}}" />
+
+    <!-- 공유 미리보기 (카카오톡·페이스북 등) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{NAME}}" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+    <meta property="og:url" content="{{SITE_URL}}{{PATH}}" />
+    <meta property="og:image" content="{{SITE_URL}}images/og-image.jpg" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="theme-color" content="#1b3c87" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{BASE}}assets/favicon-32.png" />
+    <link rel="apple-touch-icon" href="{{BASE}}assets/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{BASE}}assets/style.css" />
+    {{HEAD_EXTRA}}<script defer src="{{BASE}}assets/main.js"></script>
+
+    <!-- 검색엔진용 업체 정보 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "{{NAME}}",
+        "url": "{{SITE_URL}}",
+        "image": "{{SITE_URL}}images/og-image.jpg",
+        "telephone": "+82-{{PHONE_INTL}}",
+        "faxNumber": "+82-{{FAX_INTL}}",
+        "email": "{{EMAIL}}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{STREET}}",
+            "addressLocality": "양평군",
+            "addressRegion": "경기도",
+            "addressCountry": "KR"
+        },
+        "openingHours": "Mo-Fr 09:00-18:00"
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="{{BASE}}./">
+                <img src="{{BASE}}assets/mark.png" width="30" height="39" alt="" />
+                <span class="brand-name">{{NAME}}</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                메뉴
+            </button>
+            <nav class="site-nav" id="siteNav" aria-label="주 메뉴">
+                <ul class="nav-list">
+                    <li><a href="{{BASE}}about"{{NAV_about}}>센터소개</a></li>
+                    <li><a href="{{BASE}}greeting"{{NAV_greeting}}>인사말</a></li>
+                    <li><a href="{{BASE}}services"{{NAV_services}}>서비스 안내</a></li>
+                    <li><a href="{{BASE}}process"{{NAV_process}}>이용 절차</a></li>
+                    <li><a href="{{BASE}}location"{{NAV_location}}>오시는 길</a></li>
+                </ul>
+            </nav>
+            <a class="header-call" href="tel:{{TEL}}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+                {{PHONE}}
+            </a>
+        </div>
+    </header>
+
+    <main id="main">
+{{CONTENT}}
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <div class="footer-brand">
+                    <img src="{{BASE}}assets/mark.png" width="26" height="34" alt="" />
+                    <span>{{NAME}}</span>
+                </div>
+                <p>센터장 {{DIRECTOR}}</p>
+                <p>{{ADDRESS}}</p>
+                <p>전화 <a href="tel:{{TEL}}">{{PHONE}}</a></p>
+                <p>팩스 {{FAX}}</p>
+                <p>이메일 <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+            </div>
+            <nav class="footer-nav" aria-label="바닥글 메뉴">
+                <ul>
+                    <li><a href="{{BASE}}./">홈</a></li>
+                    <li><a href="{{BASE}}about">센터소개</a></li>
+                    <li><a href="{{BASE}}greeting">인사말</a></li>
+                    <li><a href="{{BASE}}services">서비스 안내</a></li>
+                    <li><a href="{{BASE}}process">이용 절차</a></li>
+                    <li><a href="{{BASE}}location">오시는 길</a></li>
+                </ul>
+                <p class="copyright">© {{YEAR}} {{NAME}}</p>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- 모바일 하단 고정 전화 버튼 -->
+    <a class="call-bar" href="tel:{{TEL}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+        전화 상담 {{PHONE}}
+    </a>
+</body>
+</html>

@@ -1,131 +1,85 @@
+/* 선구복지센터 공통 스크립트
+   - 모바일 메뉴 열기/닫기
+   - 오시는 길 페이지의 네이버 지도 표시 */
 document.addEventListener("DOMContentLoaded", () => {
-    /* 슬라이더 */
-    const slides = Array.from(document.querySelectorAll(".slide"));
-    let slideIndex = 0;
+    /* ---------- 모바일 메뉴 ---------- */
+    const toggle = document.getElementById("menuToggle");
+    const nav = document.getElementById("siteNav");
 
-    function rotateSlides() {
-        if (!slides.length) return;
-        slides.forEach((slide, idx) => {
-            slide.classList.toggle("active", idx === slideIndex);
-        });
-        slideIndex = (slideIndex + 1) % slides.length;
-    }
-    rotateSlides();
-    setInterval(rotateSlides, 5000);
+    const setMenu = open => {
+        if (!toggle || !nav) return;
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+    };
 
-    /* 모바일 메뉴 */
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const closeMenu = document.getElementById("closeMenu");
-
-    menuBtn?.addEventListener("click", () => mobileMenu?.classList.add("open"));
-    closeMenu?.addEventListener("click", () => mobileMenu?.classList.remove("open"));
-
-    /* 모바일 드롭다운 */
-    document.querySelectorAll(".m-dropdown > a").forEach(trigger => {
-        trigger.addEventListener("click", e => {
-            e.preventDefault();
-            trigger.parentElement?.classList.toggle("open");
-        });
+    toggle?.addEventListener("click", () => {
+        setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
 
-    /* 맨 위로 이동 버튼 */
-    const toTopBtn = document.getElementById("toTop");
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            toTopBtn?.classList.add("show");
-        } else {
-            toTopBtn?.classList.remove("show");
+    // Esc 키로 메뉴 닫기 후 버튼으로 초점 복귀
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && nav?.classList.contains("is-open")) {
+            setMenu(false);
+            toggle?.focus();
         }
     });
-    toTopBtn?.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
 
-    /* 내비게이션 활성화 표시 */
-    const currentPath = (() => {
-        const parts = location.pathname.split("/").filter(Boolean);
-        const last = parts.pop() || "index";
-        return last.replace(/\.html$/i, "");
-    })();
+    /* ---------- 네이버 지도 ---------- */
+    const mapEl = document.getElementById("naverMap");
+    if (!mapEl) return;
 
-    const normalizeHref = href => {
-        if (!href || /^https?:/i.test(href)) return null;
-        const base = href.split("#")[0]
-            .replace(/^\.\//, "")
-            .replace(/^\//, "")
-            .replace(/\.html$/i, "")
-            .replace(/\/$/, "");
-        return base || "index";
+    const address = mapEl.dataset.address || "";
+    const title = mapEl.dataset.title || "선구복지센터";
+
+    // 지도 표시 실패 시 안내 문구를 보여줌 (아래 지도 앱 버튼은 그대로 사용 가능)
+    const showFallback = () => {
+        mapEl.innerHTML =
+            '<div class="map-fallback"><p>지도를 불러오지 못했습니다.<br>아래 버튼으로 네이버지도나 카카오맵에서 확인해 주세요.</p></div>';
     };
 
-    const setActive = selector => {
-        document.querySelectorAll(selector).forEach(link => {
-            const normalized = normalizeHref(link.getAttribute("href"));
-            if (!normalized) return;
-            if (normalized === currentPath) {
-                link.classList.add("active");
-            }
-        });
-    };
-    setActive(".nav-menu a, .mobile-menu a");
+    if (!window.naver?.maps) {
+        showFallback();
+        return;
+    }
 
-    /* 스크롤 애니메이션 */
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("in-view");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll(".reveal, .card, .role-item, .metric-card, .callout-card, .content-card, .service-detail, .map-card")
-        .forEach(el => {
-            if (!el.classList.contains("reveal")) {
-                el.classList.add("reveal");
-            }
-            observer.observe(el);
-        });
-
-    /* 네이버 지도 초기화 */
-    const naverMapEl = document.getElementById("naverMap");
-    if (naverMapEl && window.naver?.maps) {
-        const lat = parseFloat(naverMapEl.dataset.lat || "0");
-        const lng = parseFloat(naverMapEl.dataset.lng || "0");
-        const title = naverMapEl.dataset.title || "위치";
-
+    // 좌표로 지도와 마커를 그림
+    const drawMap = (lat, lng) => {
         const position = new naver.maps.LatLng(lat, lng);
-        const map = new naver.maps.Map(naverMapEl, {
+        const map = new naver.maps.Map(mapEl, {
             center: position,
             zoom: 16,
             zoomControl: true,
-            zoomControlOptions: {
-                position: naver.maps.Position.TOP_RIGHT,
-            },
+            zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT },
         });
-
-        const marker = new naver.maps.Marker({
-            position,
-            map,
-        });
-
-        const infoWindow = new naver.maps.InfoWindow({
-            content: `
-                <div style="padding:10px;font-size:14px;line-height:1.5;">
-                    <strong>${title}</strong><br>
-                    경기도 양평군 용문면 용문로 323, 2층
-                </div>
-            `,
+        const marker = new naver.maps.Marker({ position, map, title });
+        const info = new naver.maps.InfoWindow({
+            content: `<div style="padding:10px 12px;font-size:14px;line-height:1.5;"><strong>${title}</strong><br>${address}</div>`,
             borderWidth: 0,
             disableAnchor: true,
-            backgroundColor: "#fff",
         });
+        naver.maps.Event.addListener(marker, "click", () => info.open(map, marker));
+        info.open(map, marker);
+    };
 
-        naver.maps.Event.addListener(marker, "click", () => {
-            infoWindow.open(map, marker);
-        });
-
-        infoWindow.open(map, marker);
+    // data-lat / data-lng 가 있으면 그 좌표를 우선 사용
+    const lat = parseFloat(mapEl.dataset.lat);
+    const lng = parseFloat(mapEl.dataset.lng);
+    if (!Number.isNaN(lat) && !Number.isNaN(lng)) {
+        drawMap(lat, lng);
+        return;
     }
+
+    // 좌표가 없으면 주소로 좌표를 조회 (NCP Geocoding API 사용 설정 필요)
+    if (!naver.maps.Service?.geocode) {
+        showFallback();
+        return;
+    }
+    naver.maps.Service.geocode({ query: address }, (status, response) => {
+        const item = response?.v2?.addresses?.[0];
+        if (status !== naver.maps.Service.Status.OK || !item) {
+            showFallback();
+            return;
+        }
+        drawMap(parseFloat(item.y), parseFloat(item.x));
+    });
 });

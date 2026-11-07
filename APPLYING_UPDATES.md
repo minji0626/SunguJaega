@@ -1,33 +1,35 @@
-# 새 디자인 적용 방법
+# 홈페이지 수정 방법
 
-이 저장소에는 새롭게 개편된 홈페이지 코드(`index.html`, `assets/style.css`, `assets/main.js`)가 이미 반영되어 있습니다. 아래 절차대로 진행하면 자신의 리포지토리나 GitHub Pages에 쉽게 적용할 수 있습니다.
+이 사이트는 GitHub Pages로 배포되는 정적 HTML 사이트입니다.
+루트의 `*.html` 파일은 **직접 고치지 말고**, `_build` 폴더의 원본을 고친 뒤 빌드합니다.
 
-## 1. 현재 코드 가져오기
-1. 새 디자인을 사용할 리포지토리에서 최신 변경사항을 가져옵니다.
-   - `git pull` 또는 포크/다운로드 후 압축 해제
-2. 기존 사이트와 비교해야 한다면, 현재 `index.html`과 `assets/` 폴더를 백업해 둡니다.
+## 폴더 구성
+| 경로 | 내용 |
+|---|---|
+| `_build/site.json` | 센터 이름·전화·팩스·주소·이메일·상담시간 (여기만 고치면 전 페이지 반영) |
+| `_build/template.html` | 모든 페이지 공통 머리글·바닥글·메타 태그 |
+| `_build/partials/contact-band.html` | 페이지 하단 연락처 띠 |
+| `_build/pages/*.html` | 페이지별 본문 (맨 위 `title`, `description` 등은 검색 결과에 표시되는 문구) |
+| `assets/style.css`, `assets/main.js` | 디자인과 동작 |
+| `images/` | 사진 (`care-visit-*.jpg`: 첫 화면, `og-image.jpg`: 카카오톡 공유 미리보기) |
 
-## 2. 변경사항 반영
-1. 이 저장소의 `index.html`, `assets/style.css`, `assets/main.js`를 그대로 복사해 덮어씁니다.
-2. 이미지 폴더(`images/`)는 이름을 바꾸지 않고 그대로 사용하거나 필요한 이미지만 추가 복사합니다.
-3. 네비게이션 링크가 다른 페이지에서도 통일되도록, 동일한 `header`/`footer` 블록을 각 HTML에 붙여 넣습니다.
+`_`로 시작하는 폴더는 GitHub Pages가 공개하지 않습니다.
 
-## 3. 로컬에서 확인
-1. 루트에서 간단히 테스트 서버를 열어 확인합니다.
-   - Python 예시: `python -m http.server 8000`
-2. 브라우저에서 `http://localhost:8000`을 열어 다음을 점검합니다.
-   - 첫 화면 슬라이더가 5초 간격으로 부드럽게 전환되는지
-   - 서비스/역할 섹션 카드가 그리드로 반응형 배치되는지
-   - 스크롤 시 페이드/슬라이드 애니메이션이 자연스러운지
-   - 모바일에서 햄버거 메뉴 토글이 정상 동작하는지
+## 수정 후 빌드
+저장소 루트에서 실행합니다.
 
-## 4. GitHub Pages 배포
-1. 변경사항을 커밋 후 원격 저장소에 푸시합니다.
-2. GitHub **Settings > Pages**에서 **Source: Deploy from a branch**, **Branch: main / (root)**로 설정합니다.
-3. 주소 `https://<USERNAME>.github.io/<REPO>/`에서 새 디자인이 적용됐는지 확인합니다.
+```powershell
+powershell -ExecutionPolicy Bypass -File _build\build.ps1
+```
 
-## 5. 문제 해결 팁
-- 캐시로 인해 스타일이 바뀌지 않을 때는 브라우저 캐시를 지우거나 `Ctrl + Shift + R`(강력 새로고침)을 사용합니다.
-- 이미지 경로가 깨질 경우 `images/` 폴더와 파일 이름을 다시 확인합니다.
-- 색상이나 카피를 수정하려면 `assets/style.css`와 `index.html`에서 직접 텍스트와 CSS 변수를 변경하면 됩니다.
-- `location.html`에서 카카오 지도 API 키를 사용하면 개발자 도구에 `sentry.min...js.map` 404 경고가 보일 수 있습니다. 이는 카카오 SDK가 제공하지 않는 소스맵을 찾으려는 로그일 뿐 기능에는 영향을 주지 않습니다.
+생성된 루트의 HTML 파일까지 함께 커밋·푸시하면 반영됩니다.
+
+## 사진 교체 시 주의
+- 가로 1600px 이하, JPG(품질 75~80) 기준 200KB 이하를 권장합니다.
+- 휴대폰 원본 사진이나 PNG를 그대로 올리면 페이지가 매우 느려집니다.
+
+## 지도
+- `location.html`은 네이버 지도 API(NCP)로 주소를 좌표로 바꿔 표시합니다.
+- NCP 콘솔에서 해당 Application의 **Web 서비스 URL에 `https://sungujaega.com`이 등록**되어 있어야 하고,
+  **Geocoding API**가 사용 설정되어 있어야 지도가 나옵니다. 둘 중 하나라도 빠지면 안내 문구와 지도 앱 버튼만 표시됩니다.
+- 좌표를 직접 지정하려면 `_build/pages/location.html`의 `#naverMap`에 `data-lat`, `data-lng`를 추가하세요.
