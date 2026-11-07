@@ -29,7 +29,8 @@ powershell -ExecutionPolicy Bypass -File _build\build.ps1
 - 휴대폰 원본 사진이나 PNG를 그대로 올리면 페이지가 매우 느려집니다.
 
 ## 지도
-- `location.html`은 네이버 지도 API(NCP)로 주소를 좌표로 바꿔 표시합니다.
-- NCP 콘솔에서 해당 Application의 **Web 서비스 URL에 `https://sungujaega.com`이 등록**되어 있어야 하고,
-  **Geocoding API**가 사용 설정되어 있어야 지도가 나옵니다. 둘 중 하나라도 빠지면 안내 문구와 지도 앱 버튼만 표시됩니다.
-- 좌표를 직접 지정하려면 `_build/pages/location.html`의 `#naverMap`에 `data-lat`, `data-lng`를 추가하세요.
+- `location.html`은 `_build/site.json`의 `LAT`, `LNG` 좌표로 네이버 지도(NCP Maps)를 표시합니다.
+- 주소를 바꾸면 **좌표도 함께** 바꿔야 합니다. 카카오맵·네이버지도에서 주소를 검색해 위도·경도를 확인하세요.
+- NCP 콘솔에서 해당 Application의 Web 서비스 URL에 `https://sungujaega.com`이 등록되어 있어야 합니다.
+  로컬 파일로 열면 "인증 실패"가 보이는 것은 정상입니다.
+- 좌표가 비어 있으면 주소 검색(Geocoding API)을 시도합니다. 현재 키는 Geocoding API가 꺼져 있어(403) 이 방식은 동작하지 않습니다.
