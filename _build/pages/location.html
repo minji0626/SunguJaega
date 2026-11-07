@@ -1,0 +1,39 @@
+title: 오시는 길 | 선구복지센터
+description: 선구복지센터 위치 안내. {{ADDRESS}}. 방문 상담은 전화로 예약 후 찾아와 주세요.
+path: location
+nav: location
+head: <script defer src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=eurikx1zl0&submodules=geocoder"></script>
+---
+        <section class="page-head">
+            <div class="wrap">
+                <h1>오시는 길</h1>
+                <p>방문 상담은 전화로 시간을 정한 뒤 찾아와 주시면 기다리지 않고 상담받으실 수 있습니다.</p>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="addr-title">
+            <div class="wrap map-layout">
+                <div>
+                    <h2 id="addr-title">센터 정보</h2>
+                    <dl class="info-list">
+                        <dt>주소</dt>
+                        <dd>{{ADDRESS}}</dd>
+                        <dt>전화</dt>
+                        <dd><a href="tel:{{TEL}}">{{PHONE}}</a></dd>
+                        <dt>팩스</dt>
+                        <dd>{{FAX}}</dd>
+                        <dt>상담 시간</dt>
+                        <dd>{{HOURS}}</dd>
+                    </dl>
+                    <p class="note" style="margin-top:1.5rem;">처음 오시는 길이 헷갈리시면 전화 주세요. 자세히 안내해 드리겠습니다.</p>
+                </div>
+                <div>
+                    <div id="naverMap" class="map-box" role="region" aria-label="센터 위치 지도"
+                         data-address="{{ADDRESS}}" data-title="{{NAME}}"></div>
+                    <div class="map-actions">
+                        <a class="btn btn-primary" href="{{NAVER_MAP_URL}}" target="_blank" rel="noopener">네이버지도에서 길찾기</a>
+                        <a class="btn btn-outline" href="{{KAKAO_MAP_URL}}" target="_blank" rel="noopener">카카오맵에서 보기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
