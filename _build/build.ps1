@@ -42,6 +42,7 @@ $iconPaths = @{
     shield  = '<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>'
     clock   = '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
     chevron = '<path d="m9 6 6 6-6 6"/>'
+    check   = '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>'
     menu    = '<path d="M4 7h16M4 12h16M4 17h16"/>'
 }
 function Get-Icon($name) {
@@ -50,6 +51,7 @@ function Get-Icon($name) {
 
 $template    = Read-Text "$buildDir\template.html"
 $contactBand = Read-Text "$buildDir\partials\contact-band.html"
+$faq         = Read-Text "$buildDir\partials\faq.html"
 $navKeys     = 'about', 'greeting', 'services', 'process', 'location'
 
 Get-ChildItem "$buildDir\pages\*.html" | ForEach-Object {
@@ -67,7 +69,7 @@ Get-ChildItem "$buildDir\pages\*.html" | ForEach-Object {
     $base = if ($meta['base']) { $meta['base'] } else { '' }
     $homeHref = if ($base) { '/' } else { './' }
 
-    $html = $template.Replace('{{CONTENT}}', $body.Replace('{{CONTACT_BAND}}', $contactBand.TrimEnd()))
+    $html = $template.Replace('{{CONTENT}}', $body.Replace('{{CONTACT_BAND}}', $contactBand.TrimEnd()).Replace('{{FAQ}}', $faq.TrimEnd()))
     $html = $html.Replace('{{BASE}}./', $homeHref)
     $html = $html.Replace('{{TITLE}}', $meta['title'])
     $html = $html.Replace('{{DESCRIPTION}}', $meta['description'])

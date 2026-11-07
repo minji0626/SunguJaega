@@ -213,7 +213,7 @@ p { margin: 0 0 1em; }
 .chips li {
     padding: 8px 16px;
     border-radius: 999px;
-    background: var(--bg);
+    background: var(--card);   /* 페이지 배경 위에서는 흰 칩, 카드 안에서는 회색 칩 */
     color: var(--sub);
     font-size: 1rem;
     font-weight: 600;
@@ -310,12 +310,12 @@ p { margin: 0 0 1em; }
     height: 100%;
     padding: 20px;
     border-radius: var(--r-md);
+    border: 1px solid var(--line);
     background: var(--card);
-    box-shadow: var(--shadow);
     color: var(--text);
     text-decoration: none;
 }
-.quick a:hover { box-shadow: var(--shadow), inset 0 0 0 2px var(--primary-soft); }
+.quick a:hover { border-color: var(--primary); }
 .quick strong { display: block; font-size: 1.08rem; }
 .quick span span { display: block; color: var(--sub); font-size: 0.95rem; line-height: 1.4; }
 .quick-icon {
@@ -337,12 +337,22 @@ p { margin: 0 0 1em; }
 .section-head .chip { margin-bottom: 12px; }
 .section-head p { margin: 0; color: var(--sub); }
 
-/* 카드 */
+/* 흰 띠 섹션: 회색 배경과 번갈아 리듬을 만듦 */
+.section.band {
+    margin-top: clamp(56px, 7vw, 96px);
+    padding: clamp(56px, 7vw, 96px) 0;
+    background: var(--card);
+}
+.section.band + .section { padding-top: clamp(56px, 7vw, 96px); }
+.band .card { background: var(--bg); border-color: transparent; }
+.band .need-list li { background: var(--card); }
+
+/* 카드: 그림자 대신 얇은 테두리로 가볍게 */
 .card {
     padding: clamp(24px, 3vw, 36px);
+    border: 1px solid var(--line);
     border-radius: var(--r-lg);
     background: var(--card);
-    box-shadow: var(--shadow);
 }
 .card > :last-child { margin-bottom: 0; }
 .card p { color: var(--sub); }
@@ -397,24 +407,38 @@ p { margin: 0 0 1em; }
     list-style: none;
     counter-reset: step;
 }
+/* 번호 원을 선으로 이어 순서대로 시선이 흐르도록 */
 .steps li {
+    position: relative;
     counter-increment: step;
-    padding: 28px 24px;
-    border-radius: var(--r-md);
-    background: var(--card);
-    box-shadow: var(--shadow);
+    padding-right: 20px;
 }
 .steps li::before {
-    content: counter(step) "단계";
-    display: inline-block;
-    margin-bottom: 14px;
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: var(--primary-soft);
-    color: var(--primary);
-    font-size: 0.92rem;
+    content: counter(step);
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1.25rem;
     font-weight: 800;
+    box-shadow: 0 0 0 8px var(--primary-soft);
 }
+.steps li::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 64px;
+    right: 4px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--primary-soft) 0 8px, transparent 8px 14px);
+}
+.steps li:last-child::after { display: none; }
 .steps strong { display: block; margin-bottom: 6px; font-size: 1.15rem; }
 .steps p { margin: 0; color: var(--sub); font-size: 1.02rem; }
 
@@ -490,18 +514,112 @@ p { margin: 0 0 1em; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .grid-2 > *, .grid-3 > *, .grid-4 > * { min-width: 0; }
+/* 내용 길이가 다른 2열은 위쪽 정렬, 사진만 옆 카드 높이에 맞춤 */
+.grid-2 { align-items: start; }
+.grid-2 > .photo { align-self: stretch; }
 
 .note { margin-top: 1rem; color: var(--sub); font-size: 1rem; }
 
+/* ---------- 사진 ---------- */
+/* 섹션 상단 가로형 사진 */
+.banner {
+    margin: 0 0 16px;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+}
+.banner img {
+    width: 100%;
+    aspect-ratio: 21 / 8;
+    object-fit: cover;
+}
+/* 카드 옆에 놓는 사진 */
+.photo {
+    margin: 0;
+    min-height: 100%;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+}
+.photo img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+}
+.photo-credit { margin-top: 8px; color: var(--sub); font-size: 0.85rem; }
+
+/* ---------- 이런 분께 필요해요 ---------- */
+.need-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+}
+.need-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: var(--r-sm);
+    background: var(--bg);
+    font-weight: 600;
+    line-height: 1.5;
+}
+.need-list .icon { width: 22px; height: 22px; margin-top: 1px; color: var(--leaf); }
+
+/* ---------- 자주 묻는 질문 ---------- */
+.faq { display: grid; gap: 12px; max-width: 880px; }
+.faq details {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--card);
+}
+.faq details[open] { border-color: var(--primary); }
+.faq summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 24px;
+    font-size: 1.12rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before {
+    content: "Q";
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 10px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 800;
+}
+/* 펼침 표시 (+ / −) */
+.faq summary::after {
+    content: "+";
+    margin-left: auto;
+    color: var(--sub);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+}
+.faq details[open] summary::after { content: "−"; }
+.faq details[open] summary { padding-bottom: 8px; }
+.faq details p {
+    margin: 0;
+    padding: 0 24px 22px 70px;
+    color: var(--sub);
+}
+
 /* ---------- 하위 페이지 머리 ---------- */
 .page-head { padding: 24px 0 0; }
-.page-head-card {
-    padding: clamp(32px, 5vw, 64px);
-    border-radius: var(--r-lg);
-    background:
-        radial-gradient(120% 90% at 0% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 60%),
-        linear-gradient(135deg, #e6eefc 0%, #eef6e4 100%);
-}
+/* 하위 페이지 머리: 그라데이션은 홈 첫 화면에만 쓰고 여기서는 큰 제목과 여백만 */
+.page-head-card { padding: clamp(24px, 4vw, 48px) 0 0; }
 .page-head-card .chip { margin-bottom: 14px; }
 .page-head-card p { max-width: 36em; margin: 0; color: var(--sub); font-size: 1.2rem; }
 
@@ -668,7 +786,8 @@ p { margin: 0 0 1em; }
 @media (max-width: 1080px) {
     .nav-list a { padding: 8px 10px; font-size: 0.98rem; }
     .quick, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .steps { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+    .steps li::after { display: none; }
     .bento .span-2 { grid-column: span 3; }
 }
 
@@ -689,6 +808,10 @@ p { margin: 0 0 1em; }
     .grid-3,
     .site-footer .wrap { grid-template-columns: 1fr; }
     .hero-photo { order: -1; }
+    .photo img { min-height: 0; aspect-ratio: 16 / 10; }
+    .banner img { aspect-ratio: 16 / 9; }
+    .need-list { grid-template-columns: 1fr; }
+    .faq details p { padding-left: 24px; }
     .hero-photo img { min-height: 0; aspect-ratio: 16 / 10; }
     .bento { grid-template-columns: 1fr; }
     .bento .span-3, .bento .span-2 { grid-column: auto; }
@@ -710,9 +833,40 @@ p { margin: 0 0 1em; }
     body { font-size: 1.0625rem; }
     .quick, .steps, .grid-4 { grid-template-columns: 1fr; }
     .hero-actions .btn { flex: 1 1 100%; }
-    .call-card { width: 100%; }
+    .call-card { width: 100%; gap: 12px; padding: 14px 16px 14px 14px; }
+    .call-card-icon { width: 48px; height: 48px; border-radius: 14px; }
+    .call-card-number { font-size: 1.6rem; white-space: nowrap; }  /* 번호가 두 줄로 끊기지 않도록 */
     .cta-info { grid-template-columns: 1fr; gap: 2px; }
     .cta-info dd { margin-bottom: 10px; }
+}
+
+/* ---------- 첫 화면 등장 (페이지에서 유일한 자동 움직임) ---------- */
+@keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes settle {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: none; }
+}
+.hero-text > * { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero-text > :nth-child(2) { animation-delay: 0.08s; }
+.hero-text > :nth-child(3) { animation-delay: 0.16s; }
+.hero-text > :nth-child(4) { animation-delay: 0.3s; }
+.hero-text > :nth-child(5) { animation-delay: 0.4s; }
+.hero-photo img { animation: settle 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* 떠 있는 전화 버튼: 첫 화면을 지나 스크롤하면 나타남 (JS가 없으면 항상 표시) */
+.js .call-float {
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.js .call-float.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
